@@ -1,0 +1,131 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title>My First Web Page</title>
+        <style>
+            h1{
+            color:white;
+            text-align: center;
+            font-size: 100px;
+        }    
+            ing{
+                width:150px;
+            }
+            input{
+                width:50px;
+            }
+            div{
+                background-color:darkturquoise;
+                width:300px;
+            }
+            body{
+                background-color:darkturquoise;                 
+            }
+            #conceal{
+                display:flex;
+            }
+            #conceal div{
+                padding: 20px 180px;
+                border-left:grey 1px solid;
+                border-right:grey 1px solid;
+            }
+            p {
+            border: 2px solid black;
+            outline:blue solid 10px;
+            margin: auto;    
+            padding: 20px;
+            text-align: center;
+        }
+
+
+        </style>
+        <script>
+                var p1 = 14 , wp1=5; 
+                var p2 = 7 ,  wp2=2;
+                var p3 = 10 , wp3=3;
+
+
+            function initPrices(){
+                document.getElementById("pc1").innerHTML = "price: $" + p1;
+                document.getElementById("pc2").innerHTML = "price: $" + p2;
+                document.getElementById("pc3").innerHTML = "price: $" + p3;
+            }
+            function processOrder(){
+                //customer item quantities
+                var q1=parseInt(document.getElementById("qty1").value);
+                var q2=parseInt(document.getElementById("qty2").value);
+                var q3=parseInt(document.getElementById("qty3").value);
+                //calculations
+                var customer_subtotal= (p1*q1)+(p2*q2)+(p3*q3);
+                var company_subtotal= (wp1*q1)+(wp2*q2)+(wp3*q3);
+                var p=customer_subtotal-company_subtotal;
+                var tr=0.0875;
+                var tax=(customer_subtotal*tr).toFixed(2);
+                var shipping=0;
+                //shipping cost
+                if(customer_subtotal<100){
+                    shipping=25;
+                }else if(customer_subtotal>100 && customer_subtotal<200){
+                    shipping=10;
+                }else shipping=0;{
+                }  
+                var cust_total=customer_subtotal+tax+shipping;
+                var item_sold=q1+q2+q3;
+                //display
+                var op=document.getElementById("output");
+                var build="";
+
+                var build = " ";
+                build += "<br><hr>";
+                build += "<pre>";//pre tag preserves all spaces 'as is';
+                build += "<u> **Customer Information** </u> <br>";//<u> underlines 
+                build += "Subtotal:                 $" + customer_subtotal + "<br>";
+                build += "Tax:                      $" + tax + "<br>";
+                build += "Shipping and Handling:    $" + shipping + "<br>";
+                build += "Total:                    $" + cust_total + "<br><hr>";
+                build += "<u> **Company Information** </u><br>";
+                build += "Customer Subtotal:        $" + customer_subtotal + "<br>";
+                build += "Company Subtotal:         $" + company_subtotal + "<br>";
+                build += "Profit/Loss:              $" + p + "<br>";
+                build += "Total Item Sold:           " + item_sold + "<br>";
+                op.innerHTML=build;
+            }
+
+        </script>
+    </head>
+    <body onload="initPrices()">
+        <h1> TheGoat's Store </h1>
+
+        <div>
+            <img src="pc1.jpg" id='pc1'></br>
+            <p>Iphone 6 phonecase</p><br>
+            <span id="pc1"></span>
+            <input type="text" id="qty1" placeholder="Enter #">
+        </div>
+
+        <div>
+            <img src="pc2.jpg"></br>
+            <p>Iphone 6 phonecase</p><br>
+            <span id="pc2"></span>
+            <input type="text" id="qty2" placeholder="Enter #">
+        </div>
+
+        <div>
+            <img src="pc3.jpg"></br>
+            <p>Iphone 6 phonecase</p><br>
+            <span id="pc3"></span>
+            <input type="text" id="qty3" placeholder="Enter #">
+        </div>
+
+        <button onclick="processOrder()"> Process Order </button>
+        <br>
+        <div id="output"></div>
+
+
+
+
+
+
+    </body>
+
+</html>        
